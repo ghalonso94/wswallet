@@ -15,3 +15,6 @@ class Sale(TimestampableMixin, models.Model):
 
     class Meta:
         ordering = ['sold_at']
+
+    def __str__(self):
+        return f'{self.sold_at} #{self.number} | {self.company.corporate_name}'

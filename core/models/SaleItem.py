@@ -14,3 +14,6 @@ class SaleItem(TimestampableMixin, models.Model):
 
     class Meta:
         ordering = ['created_at']
+
+    def __str__(self):
+        return f'#{self.sale.number} ({self.type}/{self.quantity}/{self.value})'

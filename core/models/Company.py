@@ -13,3 +13,6 @@ class Company(TimestampableMixin, models.Model):
 
     class Meta:
         ordering = ['created_at']
+
+    def __str__(self):
+        return f'{self.corporate_name} | {self.registered_number}'
