@@ -1,3 +1,5 @@
 from .ClientSerializer import ClientSerializer
 from .CompanySerializer import CompanySerializer
 from .SaleSerializer import SaleSerializer
+from .SaleItemSerializer import SaleItemSerializer
+from .CashbackSerializer import CashbackSerializer
