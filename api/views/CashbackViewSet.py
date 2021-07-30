@@ -2,12 +2,9 @@ import json
 
 from django.http import HttpResponse
 from rest_framework import viewsets, status
-from rest_framework.response import Response
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from api.models import ApiResponse
-from api.serializer.serializers import toJson, serialize, serialize_model
 from core.models import Cashback, Sale, Customer, SaleItem, Company
 from api.serializer import CashbackSerializer
 
