@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from django.db import transaction
 from django.http import HttpResponse
@@ -21,6 +22,14 @@ class CashbackViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
 
         with transaction.atomic():
+
+            try:
+                datetime.strptime(request.data["sold_at"], '%Y-%m-%d %H:%M:%S')
+            except Exception as ex:
+                response = {
+                    'error': 'Incorrect field "sold_at" format, should be YYYY-MM-DD 00:00:00'
+                }
+                return HttpResponse({json.dumps(response)}, status=status.HTTP_406_NOT_ACCEPTABLE, content_type='application/json')
 
             # Criando uma nova venda
             sale = Sale()
