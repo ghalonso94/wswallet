@@ -1,4 +1,6 @@
 import json
+import requests
+
 from datetime import datetime
 
 from django.db import transaction
@@ -144,7 +146,28 @@ class CashbackViewSet(viewsets.ModelViewSet):
             }
 
             # Calculando cashback
-            cashback.value = (total * 10)/100
+            cashback.value = (float(total) * 10)/100
             cashback.save()
 
-            return HttpResponse({json.dumps(sale)}, status=status.HTTP_201_CREATED, content_type='application/json')
+            # Enviando cashback calculado para a API secundária
+            url = 'https://5efb30ac80d8170016f7613d.mockapi.io/api/mock/Cashback'
+            data = {
+                'document': customer["document"],
+                'cashback': cashback.value
+            }
+
+            response = requests.post(url, data = data)
+            if response.status_code == '201':
+                cashback.status = 'ACCEPTED'
+                cashback.save()
+
+            cashback = {
+                'created_at': str(cashback.created_at),
+                'cashback_id': str(cashback.cashback_id),
+                'response_status': str(response.status_code),
+                'message': 'Cashback criado com sucesso!',
+                'cashback_value': cashback.value,
+                'sale': sale
+            }
+
+            return HttpResponse({json.dumps(cashback)}, status=status.HTTP_201_CREATED, content_type='application/json')
