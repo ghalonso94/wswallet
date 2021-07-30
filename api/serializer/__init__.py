@@ -1,4 +1,4 @@
-from .ClientSerializer import ClientSerializer
+from .CustomerSerializer import CustomerSerializer
 from .CompanySerializer import CompanySerializer
 from .SaleSerializer import SaleSerializer
 from .SaleItemSerializer import SaleItemSerializer

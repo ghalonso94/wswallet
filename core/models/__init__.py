@@ -1,5 +1,5 @@
 from .TimestampableMixin import TimestampableMixin
-from .Client import Client
+from .Customer import Customer
 from .Company import Company
 from .Sale import Sale
 from .SaleItem import SaleItem
