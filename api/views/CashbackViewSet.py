@@ -76,6 +76,8 @@ class CashbackViewSet(viewsets.ModelViewSet):
             sale.customer = customer
             sale.save()
 
+            cashback = Cashback(status='PENDING', sale=sale)
+
             total = request.data["total"]
 
             sale_item_list = []
@@ -140,5 +142,9 @@ class CashbackViewSet(viewsets.ModelViewSet):
                 'customer': customer,
                 'product_list': product_list
             }
+
+            # Calculando cashback
+            cashback.value = (total * 10)/100
+            cashback.save()
 
             return HttpResponse({json.dumps(sale)}, status=status.HTTP_201_CREATED, content_type='application/json')
