@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'cpf_field',
+    'localflavor',
     'core',
     'api',
+    'validate_docbr',
 ]
 
 MIDDLEWARE = [

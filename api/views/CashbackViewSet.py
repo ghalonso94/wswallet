@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from rest_framework import viewsets, status
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-
+from validate_docbr import CPF
 from core.models import Cashback, Sale, Customer, SaleItem, Company
 from api.serializer import CashbackSerializer
 
@@ -42,8 +42,23 @@ class CashbackViewSet(viewsets.ModelViewSet):
 
         # Se não encontrar nenhum consumidor, cria um novo
         if not customer:
-            customer = Customer(name=name, document=document)
-            customer.save()
+            # Validando CPF
+            cpf = CPF()
+            try:
+                validation = cpf.validate(document)
+                if validation:
+                    customer = Customer(name=name, document=document)
+                    customer.save()
+                else:
+                    response = {
+                        'error': 'CPF inválido'
+                    }
+                    return HttpResponse({json.dumps(response)}, status=status.HTTP_406_NOT_ACCEPTABLE, content_type='application/json')
+            except Exception as ex:
+                response = {
+                    'error': 'CPF inválido'
+                }
+                return HttpResponse({json.dumps(response)}, status=status.HTTP_406_NOT_ACCEPTABLE, content_type='application/json')
 
         # Atribui o consumidor à venda e salva
         sale.customer = customer
