@@ -4,8 +4,8 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from api.serializer import CashbackSerializer, SaleSerializer
-from core.models import Cashback, Sale, Company, Customer
+from api.serializer import SaleSerializer
+from core.models import Sale, Company, Customer
 
 
 

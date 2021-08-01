@@ -1,8 +1,7 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 
-from api.serializer import CompanySerializer, CustomerSerializer
-from core.models import Company, Customer
+from api.serializer import CustomerSerializer
+from core.models import Customer
 
 
 class CustomerSerializerTestCase(TestCase):
