@@ -5,7 +5,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('company', CompanyViewSet, basename='Company')
-router.register('Customer', CustomerViewSet, basename='Customer')
+router.register('customer', CustomerViewSet, basename='Customer')
 router.register('sale', SaleViewSet, basename='Sale')
 router.register('saleitem', SaleItemViewSet, basename='SaleItem')
 router.register('cashback', CashbackViewSet, basename='Cashback')

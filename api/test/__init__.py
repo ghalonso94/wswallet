@@ -1,0 +1,1 @@
+from api.test.test_serializers.company import CompanySerializerTestCase

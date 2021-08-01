@@ -157,7 +157,9 @@ class CashbackViewSet(viewsets.ModelViewSet):
             }
 
             response = requests.post(url, data = data)
-            if response.status_code == '201':
+
+            # Se o status de retorno for 201, muda o status do cashback para ACCEPTED
+            if response.status_code == 201:
                 cashback.status = 'ACCEPTED'
                 cashback.save()
 
