@@ -10,7 +10,7 @@ class CustomerModelTestCase(TestCase):
             document='000.000.000-00',
         )
 
-    def test_verify_attrs_company(self):
-        """Verification test of company attributes"""
+    def test_verify_attrs_customer(self):
+        """Verification test of Customer attributes"""
         self.assertEqual(self.customer.name, 'Customer Test')
         self.assertEqual(self.customer.document, '000.000.000-00')

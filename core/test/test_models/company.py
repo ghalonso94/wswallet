@@ -14,7 +14,7 @@ class CompanyModelTestCase(TestCase):
         )
 
     def test_verify_attrs_company(self):
-        """Verification test of company attributes"""
+        """Verification test of Company attributes"""
         self.assertEqual(self.company.corporate_name, 'Company Test')
         self.assertEqual(self.company.registered_number, '00.000.000/0001-00')
         self.assertEqual(self.company.user, self.user)
