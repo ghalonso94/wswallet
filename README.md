@@ -19,7 +19,7 @@ Password: admin
 
 #### How to Setup:
 
-- Copy the file posts/.env.sample to posts/.env and configure you environment variables
+- Create your virtual environment and configure you environment variables
 
 - Install dependencies
   ```` bash
