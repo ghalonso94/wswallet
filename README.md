@@ -2,7 +2,7 @@
 
 ## API engine to calculate and save consumer cashbacks
 
-[demo in aws](https://aws.com/)
+[Demo in AWS](http://13.59.139.127/)
 
 User: admin@admin.com \
 Password: admin
