@@ -12,8 +12,8 @@ schema_view = get_schema_view(
         default_version='v1',
         description="API Rest to generate and register cashbacks for all partners companies of WS Wallet",
         terms_of_service="#",
-        contact=openapi.Contact(email="contact@wswallet.com"),
-        license=openapi.License(name="BSD License"),
+        contact=openapi.Contact(email="ghalonso94@gmail.com"),
+        license=openapi.License(name="MIT License"),
     ),
 
     public=True,
