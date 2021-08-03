@@ -10,7 +10,6 @@ from rest_framework.permissions import IsAuthenticated
 class SaleItemViewSet(viewsets.ModelViewSet):
 
     # Show all Customers
-    queryset = SaleItem.objects.all()
     serializer_class = SaleItemSerializer
     http_method_names = ['get']
     authentication_classes = [BasicAuthentication]
