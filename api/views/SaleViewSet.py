@@ -51,6 +51,6 @@ class SaleViewSet(viewsets.ModelViewSet):
                 sale.delete()
                 return HttpResponse(json.dumps({'detail': 'Successful deleting object'}), status=status.HTTP_204_NO_CONTENT, content_type='application/json')
             else:
-                return HttpResponse(json.dumps({'detail': 'Not found'}), status=status.HTTP_406_NOT_ACCEPTABLE, content_type='application/json')
+                return HttpResponse(json.dumps({'detail': 'You do not have permission to perform this action.'}), status=status.HTTP_403_FORBIDDEN, content_type='application/json')
 
 

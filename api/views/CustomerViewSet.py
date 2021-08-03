@@ -20,7 +20,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
 
     def list(self, request):
-        """ Method for listing all sales """
+        """ Method for listing all customers """
         if request.user.is_staff:
             queryset = Customer.objects.all()
         else:
@@ -30,7 +30,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        """ Method to recover a single sale """
+        """ Method to recover a single customer """
         if request.user.is_staff:
             queryset = Customer.objects.all()
         else:
@@ -50,4 +50,4 @@ class CustomerViewSet(viewsets.ModelViewSet):
             return HttpResponse(json.dumps({'detail': 'Successful deleting object'}), status=status.HTTP_204_NO_CONTENT, content_type='application/json')
         else:
 
-            return HttpResponse(json.dumps({'detail': 'Successful deleting object'}), status=status.HTTP_204_NO_CONTENT, content_type='application/json')
+            return HttpResponse(json.dumps({'detail': 'You do not have permission to perform this action.'}), status=status.HTTP_403_FORBIDDEN, content_type='application/json')
