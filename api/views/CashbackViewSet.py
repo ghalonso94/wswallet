@@ -7,22 +7,47 @@ from django.db import transaction
 from django.http import HttpResponse
 from rest_framework import viewsets, status
 from rest_framework.authentication import BasicAuthentication
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from validate_docbr import CPF
 from core.models import Cashback, Sale, Customer, SaleItem, Company
 from api.serializer import CashbackSerializer
 
 
 class CashbackViewSet(viewsets.ModelViewSet):
+    """
+    A ViewSet for listing or retrieving Cashbacks.
+    """
 
-    # Show all Customers
-    queryset = Cashback.objects.all()
     serializer_class = CashbackSerializer
+    http_method_names = ['post', 'get', 'delete']
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def create(self, request, *args, **kwargs):
+    def list(self, request):
+        """ Method for listing all Company cashbacks """
+        if request.user.is_staff:
+            queryset = Cashback.objects.all()
+        else:
+            queryset = Cashback.objects.filter(sale__company__user__exact=request.user)
 
+        serializer = CashbackSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """ Method to recover a single Company cashback """
+        if request.user.is_staff:
+            queryset = Cashback.objects.all()
+        else:
+            queryset = Cashback.objects.filter(sale__company__user__exact=request.user)
+
+        cashback = get_object_or_404(queryset, pk=pk)
+        serializer = CashbackSerializer(cashback)
+        return Response(serializer.data)
+
+    def create(self, request, *args, **kwargs):
+        """ Method to create a new Company cashback """
         with transaction.atomic():
 
             try:
