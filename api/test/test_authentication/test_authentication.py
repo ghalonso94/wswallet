@@ -8,7 +8,7 @@ class AuthenticationUserTestCase(APITestCase):
 
     def setUp(self):
         self.list_url = reverse('Company-list')
-        self.user = User.objects.create_user('root', password='root')
+        self.user = User.objects.create_superuser('root', password='root')
 
     def test_authentication_user_credentials(self):
         """User credentials verification test"""

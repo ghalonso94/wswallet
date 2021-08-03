@@ -4,4 +4,6 @@ from api.test.test_serializers.sale import SaleSerializerTestCase
 from api.test.test_serializers.saleitem import SaleItemSerializerTestCase
 from api.test.test_serializers.customer import CustomerSerializerTestCase
 
-from api.test.test_authentication import AuthenticationUserTestCase
+from api.test.test_authentication.test_authentication import AuthenticationUserTestCase
+
+from api.test.test_viewsets.company import CompanyViewSetTestCase
