@@ -49,7 +49,6 @@ class CashbackViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         """ Method to create a new Company cashback """
         with transaction.atomic():
-
             try:
                 datetime.strptime(request.data["sold_at"], '%Y-%m-%d %H:%M:%S')
             except Exception as ex:
@@ -131,7 +130,7 @@ class CashbackViewSet(viewsets.ModelViewSet):
                     sale_item.value = p["value"]
                     sale_item.quantity = p["qty"]
                     sale_item.save()
-                    total_conference += float(sale_item.value)
+                    total_conference += (float(sale_item.value) * sale_item.quantity)
                     sale_item_list.append(sale_item)
 
             #Conferindo se os valores batem com o total
@@ -139,6 +138,7 @@ class CashbackViewSet(viewsets.ModelViewSet):
                 response = {
                     'error': 'field "total" does not match the sum of the products'
                 }
+                print('resp 5')
                 return HttpResponse({json.dumps(response)}, status=status.HTTP_406_NOT_ACCEPTABLE, content_type='application/json')
 
             # Montando dict dos itens para retornar na API
